@@ -1,0 +1,61 @@
+---
+title: "Flood Probability"
+format: html
+---
+
+## Libraries
+
+```{r}
+#| label: libraries
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Load libraries
+library(tidyverse)
+```
+
+## Data
+
+```{r}
+#| label: data
+#| warning: false
+#| message: false
+#| code-fold: show
+
+# Load testing data for Weibull distribution
+data_weibull <- read_delim("data/Test_Weibull_Plot.csv")
+```
+
+## Weibull distribution plot
+
+```{r}
+#| label: plot-weibull
+#| warning: false
+#| message: false
+#| code-fold: true
+
+# Weibull distribution plot
+data_weibull |>
+  ggplot(aes(x = X, y = Y)) +
+  scale_x_log10(
+    breaks = seq(0.01, 99.99, by = 10), # breaks and lines in x axis
+    limits = c(0.01, 99.99),
+  ) +
+  scale_y_log10(
+    breaks = seq(1, 10000, by = 1000), # breaks and lines in y axis
+    limits = c(1, 10000)
+  ) +
+  geom_point() +
+  geom_smooth(color = "black") +
+  ggtitle("Logarithmic Graph") +
+  xlab("X-axis label") +
+  ylab("Y-axis label") +
+  theme_bw() +
+  theme(
+    # Color and type of grid lines
+    panel.grid.major = element_line(color = "Gray30", linetype = "solid"), 
+    panel.grid.minor = element_line(color = "Gray30", linetype = "solid")
+  )
+```
+
